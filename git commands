@@ -1,0 +1,48 @@
+1.To check branch
+-> git branch
+
+2.To check the changes that are done after last commit
+-> git status
+
+3.To commit file
+-> git add . (to add all the files simultaneously)
+ OR
+ ->git add file1_name file2_name .(to add specific files)
+ 
+ ->git commit -m "#issue_number|commit-message" (Don't forget #, else changes that are committed won't come under particular issue)
+ ->git push
+ 
+ 4.To check out to new branch
+ -> git checkout branch_name
+ (Before switching to another branch, changes in current branch must be committed)
+ 
+ 5.To create new branch
+ -> git checkout -b "branch_name"
+ 
+ NOTE-Don't create a branch with #, but give # while commiting
+ 
+ 6.To clone the particular repository
+ -> git clone <http://repo_link>
+ (To download existing source code from a remote repo of latest version of project.)
+ 
+ 7.To delete a branch
+ ->git  branch -d branch_name
+ 
+ 8.To save or push the half done code to satck
+ ->git stash
+ 
+ 9.To get updates from current repo
+ Combo of git fetch and git merge
+ -> git pull <remote>
+ 
+ 10.To revert the changes
+ ->git revert hash_code
+ 
+ 11.To merge our branch to master
+ Commit all the changes
+ ->git checkout master
+ ->git pull origin master
+ ->git merge our_branch_name
+ 
+ 12.To raise PR
+ Pull request-> new_pull_request-> specify-from-and-to-branches -> create_pull_request
