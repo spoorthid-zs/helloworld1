@@ -46,3 +46,14 @@
  
  12.To raise PR
  Pull request-> new_pull_request-> specify-from-and-to-branches -> create_pull_request
+
+13.When you get this while trying to push,
+Updates were rejected,because the remote contains the work that you do not have locally.
+It's because, you have made some changes in your branch remotelly and you don't have it locally 
+so do
+git stash
+git pull origin your_branchName
+then just give 
+git push
+
+you can see the commit under your issue.
