@@ -1,0 +1,46 @@
+1.To open SQL in terminal
+    sudo mysql;
+
+2.To see databases
+    show databases
+
+3.To go inside specific database
+    use database_name;
+
+4.To list tables
+    show tables;
+
+5.To create Table
+    CREATE TABLE TABLE_NAME (COLUMN_NAME DATATYPES[,....]); 
+
+example
+CREATE TABLE EMPLOYEE(Name VARCHAR2(20), Email VARCHAR2(100), DOB DATE);  
+
+6.DROP: It is used to delete both the structure and record stored in the table.
+    DROP TABLE table_name;  
+
+7.To add a new column in the table
+    ALTER TABLE table_name ADD column_name COLUMN-definition;   
+
+8.To modify existing column in the table
+    ALTER TABLE table_name MODIFY(column_definitions....);  
+
+9.TRUNCATE: It is used to delete all the rows from the table and free the space containing the table.
+    TRUNCATE TABLE table_name;  
+
+10.INSERT: The INSERT statement is a SQL query. It is used to insert data into the row of a table.
+    INSERT INTO TABLE_NAME    
+    (col1, col2, col3,.... col N)  
+    VALUES (value1, value2, value3, .... valueN);  
+
+11.UPDATE: This command is used to update or modify the value of a column in the table.
+      UPDATE table_name SET [column_name1= value1,...column_nameN = valueN] [WHERE CONDITION]   
+
+12.DELETE: It is used to remove one or more row from a table.
+      DELETE FROM table_name [WHERE condition];  
+      
+13.Syntax to show the schema of a table with the help of show create table command.
+  show create table yourTableName;
+  
+14.To describe table
+    desc table_name;
