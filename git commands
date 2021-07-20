@@ -25,8 +25,8 @@
  -> git clone <http://repo_link>
  (To download existing source code from a remote repo of latest version of project.)
  
- 7.To delete a branch
- ->git  branch -d branch_name
+ 7.To delete a branch locally
+ ->git  branch -D branch_name
  
  8.To save or push the half done code to satck
  ->git stash
