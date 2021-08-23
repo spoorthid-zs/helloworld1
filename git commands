@@ -57,3 +57,19 @@ then just give
 git push
 
 you can see the commit under your issue.
+
+14.To Rename branch locally
+Checkout to local branch that you wish to rename
+git checkout <old_name>
+
+to rename branch locally
+git branch -m <new_name>
+
+15.To rename branch remotely
+If you’ve already pushed the <old_name> branch to the remote repository ,
+
+Push the <new_name> local branch and reset the upstream branch:
+git push origin -u <new_name>
+
+Delete the <old_name> remote branch:
+git push origin --delete <old_name>
