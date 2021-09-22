@@ -1,0 +1,56 @@
+To run opentsdb 
+Run the server in one console
+cmd/server 
+go run main.go
+
+run the daemon in another console
+cmd/daemon
+go run main.go /monitor
+
+run the opentsdb in another console
+go/src/monitor
+sudo docker run -dp 4242:4242 petergrace/opentsdb-docker
+
+Then go to any browser, hit
+localhost:4242
+It will open opentsdb, select 
+From : zero
+To: now
+
+Then in Postman,
+Create a monitor, once you start daemon
+example: 
+"id":31,
+"type":"WEB",
+"url":"https://www.netflix.com",
+"name":"netflix",
+"expectedStatus":200,
+"method":"GET",
+"frequency":"@every 1m",
+"zone":"Asia"
+
+Then go to opentsdb(in browser)
+in Matric: type m
+it will fetch the monitor_id you created after running daemon
+(so now it will show 31).
+
+Then in Postman, hit load point load
+give the id:31
+start :1h-ago
+unmark the end
+hit the send button
+
+It will show
+example:
+"data": {
+"1630914282": {
+"load": 1630,
+"size": 415157,
+"up": 1
+}
+}
+
+Then start ui
+npm start
+it will show the monitors, it show details
+it will provide the graph
