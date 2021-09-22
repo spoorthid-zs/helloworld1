@@ -1,0 +1,88 @@
+Install Docker 
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+
+In go/src/ create monitor-ui directory and clone monitor-ui there
+
+In go/src/monitor-ui/monitoring-ui
+sudo docker build -f Dockerfile . -t "ui"
+sudo docker images-list all the images
+sudo docker run -dp 3000:80 ui
+sudo docker ps
+
+In go/src/monitor
+For Server
+CGO_ENABLED=0 go build -o build/main cmd/server/main.go
+sudo docker build -f cmd/server/Dockerfile . -t "server"
+sudo docker run -it server
+
+For Deamon
+CGO_ENABLED=0 go build -o build/daemon cmd/daemon/main.go
+sudo docker build -f cmd/daemon/Dockerfile . -t "daemon"
+sudo docker run -it --net=host daemon
+
+Now,Give sudo docker ps
+it will list down all the images for ui,server,deamon
+
+sudo docker run -dp 4242:4242 petergrace/opentsdb-docker
+it will generate image for opentsdb-another container
+Now-do 
+sudo docker ps
+including opentsdb we will have all the images.
+
+In any browser- give 
+localhost:3000
+it will redirect to UI
+
+
+End to end testing using ngrock
+Install ngrok globally
+you tube link - https://youtu.be/AImtP3tMtaQ
+
+$sudo apt-get install unzip wget
+$wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+$unzip ngrok-stable-linux-amd64.zip
+$sudo mv ./ngrok /usr/bin/ngrok
+$ngrok
+
+Then run Backend server
+in go/src/monitor/cmd/server
+go run main.go
+in go/src/monitor/cmd/deamon
+go run main.go /monitor
+
+
+
+Then in new terminal give 
+ngrok http 8000
+(8000-port on which the backend is running)
+
+then we will get link of http and https,
+copy the one with https
+eg:= https://2acd41552d6a.ngrok.io
+
+then add this in monitoring_ui/ .env file
+REACT_APP_API_URL =https://2acd41552d6a.ngrok.io
+
+Start the React server
+npm start
+NOTE: - if npm is not installed, give :-npm install
+then run the react server
+
+it will redirect you to the local host
+
+SET ENV Variables in console-
+to fetch them from workflow
+
+same procedure is followed as we do while building docker image
+1.
+CGO_ENABLED=0 go build -o build/main cmd/server/main.go
+
+2.but need to set env variables while building
+so the command would be something like
+
+sudo docker build  --build-arg APP_NAME=monitor-api --build-arg APP_VERSION=dev --build-arg HTTP_PORT=8000 --build-arg OPENTSDB_PORT=4242 --build-arg DB_PORT=3306 --build-arg DB_NAME=monitor_service --build-arg DB_DIALECT=mysql --build-arg DAEMON_NAME=monitor-daemon --build-arg OPENTSDB_SERVER=localhost --build-arg DB_HOST=localhost --build-arg DB_USER=monitor --build-arg DB_PASSWORD=zopsmart@123M --build-arg INVALIDATE_TOKEN_URL=https://accounts.google.com/o/oauth2/revoke?token= --build-arg GOOGLE_AUTH_URL=https://www.googleapis.com/oauth2/v2/userinfo?access_token= -f cmd/server/Dockerfile . -t "server"
+
+3.then run it 
+sudo docker run -it server
+
+--build-arg var_name=${VARIABLE_NAME}
